@@ -54,6 +54,6 @@ $(document).ready(function() {
       }
     }).
     run(function() {
-      console.log('run')
+      console.log('run');
     })
 })
