@@ -1,0 +1,11 @@
+<h1>Joke</h1>
+
+<table>
+  <tbody>
+    <% @jokes.each do |joke| %>
+      <tr>
+        <td><%= joke.content %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
