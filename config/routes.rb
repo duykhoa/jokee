@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     get :index
   end
 
+  resource :votes, only: [:create]
+
   root 'jokes#index'
 end
