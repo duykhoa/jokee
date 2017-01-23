@@ -4,15 +4,27 @@ function JokeHelper(scope, http, cookies) {
   this.cookies = cookies;
 }
 
+JokeHelper.prototype.toggleSpinner = function() {
+  $("#loading").toggleClass("hidden");
+}
+
 JokeHelper.prototype.getRandomJoke = function() {
   $this = this;
+  $this.toggleSpinner();
 
   $this.http({
     method: 'GET',
     url: '/jokes/random'
   }).then(function successCallback(resp) {
     $this.scope.joke = resp.data;
+    if (resp.status === 204) {
+      $this.scope.noMoreJoke = true;
+    }
+
+    $this.toggleSpinner();
   }, function errorCallback(resp) {
+    $this.toggleSpinner();
+    $this.noMoreJoke = true;
     console.log(resp.error);
   })
 }

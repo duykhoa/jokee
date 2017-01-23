@@ -7,7 +7,11 @@ class JokesController < ApplicationController
   def random
     @joke = Joke.not_in(voted_joke_ids)
 
-    render json: @joke
+    if @joke
+      render json: @joke
+    else
+      render json: { error: "no more joke" }, status: 204
+    end
   end
 
   private
