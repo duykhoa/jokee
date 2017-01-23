@@ -2,6 +2,11 @@ class JokesController < ApplicationController
   # GET /jokes
   # GET /jokes.json
   def index
-    @jokes = Joke.all
+    @joke = Joke.first
+  end
+
+  def random
+    @joke = Joke.last
+    render json: @joke
   end
 end
