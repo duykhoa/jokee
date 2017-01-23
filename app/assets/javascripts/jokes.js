@@ -51,21 +51,22 @@ JokeHelper.prototype.vote = function(status, joke,  callback) {
 $(document).ready(function() {
   jokee = angular.module('Jokee',[
     'ngCookies'
-  ]).
-    controller('JokeCtrl', function($scope, $http, $cookies){
+  ]);
 
-      jokeHelper = new JokeHelper($scope, $http, $cookies);
-      jokeHelper.getRandomJoke();
+  jokee.controller('JokeCtrl', function($scope, $http, $cookies){
+    jokeHelper = new JokeHelper($scope, $http, $cookies);
+    jokeHelper.getRandomJoke();
 
-      $scope.like = function(joke) {
-        new JokeHelper($scope, $http, $cookies).vote('like', $scope.joke);
-      }
+    $scope.like = function(joke) {
+      new JokeHelper($scope, $http, $cookies).vote('like', $scope.joke);
+    }
 
-      $scope.dislike = function(joke) {
-        new JokeHelper($scope, $http, $cookies).vote('dislike', $scope.joke);
-      }
-    }).
-    run(function() {
-      console.log('run');
-    })
+    $scope.dislike = function(joke) {
+      new JokeHelper($scope, $http, $cookies).vote('dislike', $scope.joke);
+    }
+  });
+
+  jokee.run(function() {
+    console.log('run');
+  });
 })
