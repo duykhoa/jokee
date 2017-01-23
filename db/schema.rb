@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170123042705) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "value"
+    t.integer  "joke_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

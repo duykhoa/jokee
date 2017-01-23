@@ -1,20 +1,20 @@
-<div class="container">
+<div class="container" ng-controller="JokeCtrl">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="joke-wrapper">
         <div class="joke-content">
-          <%= @joke.content %>
+          {{joke.content}}
         </div>
 
         <div class="joke-opinion">
-          <div class="col-md-1">
-            <a href="" class="like">
+          <div class="col-md-2">
+            <a href="" class="like" ng-click='like(joke)'>
               <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
             </a>
           </div>
 
-          <div class="col-md-1">
-            <a href="" class="dislike">
+          <div class="col-md-2">
+            <a href="" class="dislike" ng-click='dislike(joke)'>
               <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
             </a>
           </div>

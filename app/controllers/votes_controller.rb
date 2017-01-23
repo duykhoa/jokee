@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def create
     begin
       vote = Vote.new(vote_params)
@@ -14,8 +16,6 @@ class VotesController < ApplicationController
   end
 
   def vote_params
-    params.require(:vote).permit(:value).tap do |params|
-      #params[:value] = params[:value].to_i
-    end
+    params.require(:vote).permit(:value, :joke_id)
   end
 end

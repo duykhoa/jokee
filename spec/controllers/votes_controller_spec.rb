@@ -4,7 +4,8 @@ describe VotesController, type: :controller do
   describe "#create" do
     it "successfully create like vote" do
       params = {
-        value: 'like'
+        value: 'like',
+        joke_id: 1
       }
 
       resp = post :create, vote: params
@@ -13,7 +14,8 @@ describe VotesController, type: :controller do
 
     it "successfully create dislike vote" do
       params = {
-        value: 'dislike'
+        value: 'dislike',
+        joke_id: 1
       }
 
       resp = post :create, vote: params
@@ -22,6 +24,7 @@ describe VotesController, type: :controller do
 
     it "unsuccessfully" do
       params = {
+        joke_id: 1,
         value: 'asdfasdfa'
       }
 
