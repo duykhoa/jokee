@@ -1,13 +1,27 @@
-function JokeHelper(joke, http, cookies) {
-  this.joke = joke;
+function JokeHelper(scope, http, cookies) {
+  this.scope = scope;
   this.http = http;
   this.cookies = cookies;
 }
 
-JokeHelper.prototype.vote = function(status, callback) {
-  joke = this.joke;
+JokeHelper.prototype.getRandomJoke = function() {
+  $this = this;
+
+  $this.http({
+    method: 'GET',
+    url: '/jokes/random'
+  }).then(function successCallback(resp) {
+    $this.scope.joke = resp.data;
+  }, function errorCallback(resp) {
+    console.log(resp.error);
+  })
+}
+
+JokeHelper.prototype.vote = function(status, joke,  callback) {
+  joke = joke;
   http = this.http;
   cookies = this.cookies;
+  $this = this
 
   http({
     method: 'POST',
@@ -18,6 +32,7 @@ JokeHelper.prototype.vote = function(status, callback) {
     }
   }).then(function successCallback(resp) {
     cookies.put("vote-for-" + joke.id, status);
+    $this.getRandomJoke();
   })
 }
 
@@ -26,22 +41,16 @@ $(document).ready(function() {
     'ngCookies'
   ]).
     controller('JokeCtrl', function($scope, $http, $cookies){
-      $http({
-        method: 'GET',
-        url: '/jokes/random'
-      }).then(function successCallback(resp) {
-        $scope.joke = resp.data;
-      }, function errorCallback(resp) {
-        console.log(resp.error);
-      })
 
+      jokeHelper = new JokeHelper($scope, $http, $cookies);
+      jokeHelper.getRandomJoke();
 
       $scope.like = function(joke) {
-        new JokeHelper($scope.joke, $http, $cookies).vote('like');
+        new JokeHelper($scope, $http, $cookies).vote('like', $scope.joke);
       }
 
       $scope.dislike = function(joke) {
-        new JokeHelper($scope.joke, $http, $cookies).vote('dislike');
+        new JokeHelper($scope, $http, $cookies).vote('dislike', $scope.joke);
       }
     }).
     run(function() {

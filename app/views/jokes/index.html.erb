@@ -1,5 +1,5 @@
 <div class="container" ng-controller="JokeCtrl">
-  <div class="row">
+  <div class="row" ng-if = "joke">
     <div class="col-md-6 col-md-offset-3">
       <div class="joke-wrapper">
         <div class="joke-content">
@@ -20,6 +20,12 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row" ng-if="!joke">
+    <div class="col-md-6 col-md-offset-3">
+      That's all the jokes for today! Come back another day!
     </div>
   </div>
 </div>
